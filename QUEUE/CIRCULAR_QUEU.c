@@ -1,5 +1,5 @@
 // Program: Circular Queue Implementation in C
-// Author: [Your Name]
+// Author: [Souvik Sarkar]
 // Description: This program demonstrates a circular queue using an array.
 //              It supports insertion, deletion (pop), peeking at the front element,
 //              and displaying all elements in the queue.
