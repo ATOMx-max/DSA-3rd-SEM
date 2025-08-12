@@ -1,5 +1,5 @@
 // Linear Queue Implementation in C
-// Author: [Your Name]
+// Author: [Souvik Sarkar]
 // Description: This program implements a linear queue using an array with basic operations: 
 // Insert (enqueue), Pop (dequeue), Peek, Display, and Exit.
 
