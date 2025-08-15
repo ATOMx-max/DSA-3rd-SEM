@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/souviksarkar/Library/Mobile Documents/com~apple~CloudDocs/AOT COLLAGE ALL WORK/2 nd Year/3RD SEM/DSA/CODE/PREEFIX",
+      "program": "/Users/souviksarkar/Library/Mobile Documents/com~apple~CloudDocs/AOT COLLAGE ALL WORK/2 nd Year/3RD SEM/DSA/CODE/PREEFIX/build/Debug/outDebug"
+    }
+  ]
+}
