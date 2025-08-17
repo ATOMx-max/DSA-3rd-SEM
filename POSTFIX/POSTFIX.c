@@ -2,6 +2,7 @@
     #include<stdbool.h>
     #include<stdlib.h>
     #include<string.h>
+    #include<ctype.h>
     #define MAX 40
     char stack[MAX];
     int top=-1;
@@ -12,20 +13,14 @@
         char str[MAX];
     };
     struct element output[MAX];
-
-
     bool empty()
     {
         return (top==-1);
     }
-
-
     bool full()
     {
         return(top==MAX-1);
     }
-
-
     void push(char c)
     {
         if(full())
@@ -58,7 +53,6 @@
             return stack[top--];
         }
     }
-
     int is_opperent(int i,char infix[])
     {
         if(infix[i]>='a' && infix[i]<='z') return 1;
@@ -179,10 +173,46 @@
             temp[1] = '\0';
             strcpy(output[op++].str,temp);
         }
-        output[op].str[0]='\0';
+        output[op].str[0]='\0';//imp for evaluction check
     }
-
     //EVALUTING POSTFIX
+    int eval_postfix()
+    {
+        int eval_stack[MAX];
+        int eval_top=-1;
+        for (int i=0;output[i].str[0]!='\0';i++)
+        {
+            if(isdigit(output[i].str[0]))
+            {
+                eval_stack[++eval_top]=atoi(output[i].str);
+            }
+            else{
+                int op2=eval_stack[eval_top--];
+                int op1=eval_stack[eval_top--];
+                switch (output[i].str[0])
+                {
+                case '+':
+                    eval_stack[++eval_top]=op1+op2;
+                    break;
+                case '-':
+                    eval_stack[++eval_top]=op1-op2;
+                    break;
+                case '*':
+                    eval_stack[++eval_top]=op1*op2;
+                    break;
+                case '/':
+                    eval_stack[++eval_top]=op1/op2;
+                    break;
+                case '^':
+                    printf("This ^ not programed exit...");
+                    exit(1);
+                    break;
+                default: printf("Unknown operator\n"); exit(1);
+                }
+            }
+        }
+        return eval_stack[eval_top];
+    }
     int main()
     {
         char infix[MAX];
@@ -191,14 +221,28 @@
         printf("INFIX EXPRACTION:%s\n",infix);
         postfix(infix);
         printf("POSTFIX EXPRACTION:");
+        int flag=0;
         for (int j = 0; output[j].str[0] != '\0'; j++) 
         {
+            if(!isdigit(output[j].str[0])||isdigit(output[j].str[0])=='^')
+            {
+                flag=1;
+            }
             printf("%s ", output[j].str);
+        }
+        if(flag)
+        {
+            int ip;
+            printf("\nWant to evalute the postfix Expraction(y=1/n=0)");
+            scanf("%d",&ip);
+            if(ip==1)
+            {
+                printf("Evaluted postfix expraction is:%d",eval_postfix());
+            }
         }
         printf("\n");  
         return 0;
     }
-
     /*LIMITACTION:
     1)bracket like (a+b
     2)spcae in caracter
