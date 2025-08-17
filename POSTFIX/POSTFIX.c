@@ -6,8 +6,6 @@
     #define MAX 40
     char stack[MAX];
     int top=-1;
-    //char output[MAX];
-    //define structure
     struct element
     {
         char str[MAX];
@@ -102,6 +100,10 @@
                     strcpy(output[op++].str, temp);
                     i++;
                 }
+            }
+            else if (infix[i]==' ')
+            {
+                i++;
             }
             //checking for bracket
             else if(infix[i]=='(')
@@ -217,16 +219,17 @@
     {
         char infix[MAX];
         printf("Enter the Infix expraction:");
-        scanf("%s",infix);
+        scanf("%[^\n]s",infix);
+        //fgets(infix,sizeof(infix),stdin);
         printf("INFIX EXPRACTION:%s\n",infix);
         postfix(infix);
         printf("POSTFIX EXPRACTION:");
-        int flag=0;
+        int flag=1;
         for (int j = 0; output[j].str[0] != '\0'; j++) 
         {
-            if(!isdigit(output[j].str[0])||isdigit(output[j].str[0])=='^')
+            if(!isdigit(output[j].str[0])||output[j].str[0]=='^')
             {
-                flag=1;
+                flag=0;
             }
             printf("%s ", output[j].str);
         }
@@ -243,7 +246,3 @@
         printf("\n");  
         return 0;
     }
-    /*LIMITACTION:
-    1)bracket like (a+b
-    2)spcae in caracter
-    */
