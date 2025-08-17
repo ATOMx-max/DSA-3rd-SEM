@@ -102,8 +102,7 @@
                 }
                 else
                 {
-                    strcpy(output[op++].str,infix[i]);
-                    i++;
+                    strcpy(output[op++].str,infix[i++]);
                 }
             }
             //checking for bracket
@@ -163,8 +162,7 @@
             strcpy(output[op++].str,pop());
             //output[op++]=pop();//till stack empty
         }
-        char p='\0';
-        strcpy(output[op].str,p);
+        strcpy(output[op].str,'\0');
     }
 
     //EVALUTING POSTFIX
