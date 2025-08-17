@@ -102,7 +102,10 @@
                 }
                 else
                 {
-                    strcpy(output[op++].str,infix[i]);
+                    char temp[2];
+                    temp[0] = infix[i];
+                    temp[1] = '\0';
+                    strcpy(output[op++].str, temp);
                     i++;
                 }
             }
@@ -116,7 +119,11 @@
             {
                 while(stack[top]!='(')
                 {
-                    strcpy(output[op++].str,pop());//append
+                    char temp[2];
+                    temp[0] = pop();   // get the character
+                    temp[1] = '\0';
+                    strcpy(output[op++].str,temp);
+                    //strcpy(output[op++].str,c);//append
                     //output[op++]=pop();
                 }
                 pop();//discart (
@@ -140,7 +147,11 @@
                 {
                     while(!empty() && prec(infix[i])<=prec(peek()) && peek()!='(')
                     {
-                        strcpy(output[op++].str,pop());
+                        char temp[2];
+                        temp[0] = pop();   // get the character
+                        temp[1] = '\0';
+                        strcpy(output[op++].str,temp);
+                        //strcpy(output[op++].str,pop());
                         //output[op]=pop();
                     }
                     push(infix[i]);
@@ -150,7 +161,10 @@
                 {
                     while(!empty() && prec(infix[i])<prec(peek()) && peek()!='(')
                     {
-                        strcpy(output[op++].str,pop());
+                        char temp[2];
+                        temp[0] = pop();   // get the character
+                        temp[1] = '\0';
+                        strcpy(output[op++].str,temp);
                         //output[op++]=pop();
                     }
                     push(infix[i]);
@@ -160,11 +174,12 @@
         }
         while(!empty())
         {
-            strcpy(output[op++].str,pop());
-            //output[op++]=pop();//till stack empty
+            char temp[2];
+            temp[0] = pop();   // get the character
+            temp[1] = '\0';
+            strcpy(output[op++].str,temp);
         }
-        char p='\0';
-        strcpy(output[op].str,p);
+        output[op].str[0]='\0';
     }
 
     //EVALUTING POSTFIX
