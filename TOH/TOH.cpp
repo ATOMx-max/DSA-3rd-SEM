@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-int c=0;//global counter
+auto c=0;//global counter
 
 //prototype
 void TOH(int ,char ,char ,char);
