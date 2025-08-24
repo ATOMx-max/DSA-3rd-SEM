@@ -1,10 +1,13 @@
 #include<stdio.h>
 #include<stdbool.h>
 #include<stdlib.h>
+#include<string.h>
 #define MAX 40
 char stack[MAX];
 int top=-1;
 char output[MAX];
+char reve[MAX];
+char prefix[MAX];
 
 bool empty()
 {
@@ -134,6 +137,22 @@ void postfix(char infix[])
     }
     output[op]='\0';
 }
+void rev()
+{
+    strcpy(reve,output);
+    for(int i=0;i<strlen(reve)/2;i++)
+    {
+        char temp;
+        temp=reve[i];
+        reve[i]=reve[strlen(reve)-1-i];
+        reve[strlen(output)-1-i]=temp;
+    }
+    for(int i=0;i<strlen(reve);i++)
+    {
+        if(reve[i]=='(') reve[i]=')';
+        else if(reve[i]==')') reve[i]='(';
+    }
+}
 int main()
 {
     char infix[MAX];
@@ -141,6 +160,8 @@ int main()
     scanf("%s",infix);
     printf("INFIX EXPRACTION:%s\n",infix);
     postfix(infix);
-    printf("POSTFIX EXPRACTION:%s",output);
+    printf("POSTFIX EXPRACTION:%s\n",output);
+    rev();
+    printf("rev of post fix is:%s\n",reve);
     return 0;
 }
