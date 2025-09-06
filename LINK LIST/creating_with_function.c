@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+//shorted inserction and reverse and also just print the rev
 struct node
 {
     int val;
@@ -179,43 +180,71 @@ void delete_from_anyposiction()
     }
 }
 
-
-int main()
+void inset_short()
 {
-    int cho;
-    printf("\n===========Linked List menue===========\n");
-    printf("1)Create linked list\n");
-    printf("2)Add Element from back\n");
-    printf("3)Add Element from front\n");
-    printf("4)Print linked list\n");
-    printf("5)Find Middle element\n");
-    printf("6)Delete element from back\n");
-    printf("7)Delete element from front\n");
-    printf("8)Delete element from anyposiction\n");
-    printf("9)Total Element in link list\n");
-    printf("10)Exit\n");
-    int i=1;
-    while(i!=0)
+    if (head==NULL)
     {
-        printf("Enter your choice:");
-        scanf("%d",&cho);
-        switch(cho)
-        {
-            case 1:head=create_node();break;
-            case 2:add_from_back();break;
-            case 3:add_from_front();break;
-            case 4:print_link_list();break;
-            case 5:middle_value_linklist();break;
-            case 6:delete_from_back();break;
-            case 7:delete_from_front();break;
-            case 8:delete_from_anyposiction();break;
-            case 9:printf("Total element in Linked List is:%d\n",linked_list_counter());break;
-            case 10:printf("Exiting..\n");exit(0);break;
-            default:printf("Please enter correct input\n");
-        }
-        printf("Want to use more function(Y=1/N=0):");
-        scanf("%d",&i);
+        printf("Linked list is empty.\n");
+        return;
     }
-    printf("Thank you..\n");
+    struct node *temp=head;
+    //struct node *prv;
+    struct node *create=create_node();
+    if(create->val<head->val)//at first node
+    {
+        create->next=temp;
+        head=create;
+        return;
+    }
+    while(temp->next!=NULL && create->val>temp->next->val)
+    {
+        temp=temp->next;
+    }
+    create->next=temp->next;
+    temp->next=create;
+}
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int cho;
+
+    do {
+        printf("\n=========== Linked List Menu ===========\n");
+        printf("1) Create linked list\n");
+        printf("2) Add element at back\n");
+        printf("3) Add element at front\n");
+        printf("4) Print linked list\n");
+        printf("5) Find middle element\n");
+        printf("6) Delete element from back\n");
+        printf("7) Delete element from front\n");
+        printf("8) Delete element from any position\n");
+        printf("9) Total elements in linked list\n");
+        printf("10)Enter element in shorted way\n");
+        printf("11) Exit\n");
+        printf("========================================\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &cho);
+
+        switch (cho) {
+            case 1: head = create_node(); break;
+            case 2: add_from_back(); break;
+            case 3: add_from_front(); break;
+            case 4: print_link_list(); break;
+            case 5: middle_value_linklist(); break;
+            case 6: delete_from_back(); break;
+            case 7: delete_from_front(); break;
+            case 8: delete_from_anyposiction(); break;
+            case 9: printf("Total elements in linked list: %d\n", linked_list_counter()); break;
+            case 10:inset_short();break;
+            case 11: printf("Exiting...\n"); exit(0);
+            default: printf("Please enter a valid option (1–10).\n");
+        }
+
+    } while (cho != 11);
+
     return 0;
 }
