@@ -1,3 +1,4 @@
+//STACK
 #include<stdio.h>
 #include<stdbool.h>
 #include<stdlib.h>
@@ -12,7 +13,6 @@ bool is_empty(struct Node *top)
     if(top==NULL)return 1;
     return 0;
 }
-
 //this function create a node
 //check the node is created or not 
 //if yes then take input of value and assine it in the current->val and current->next=NULL
