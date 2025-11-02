@@ -111,7 +111,7 @@ int search(int key)
 }
 int smallestR(struct node *r)
 {
-    if(r==NULL)return INT32_MAX;
+    if(r==NULL)return INT_MAX;
     else if(r->lchild==NULL)return r->data;
     else
     {
@@ -120,7 +120,7 @@ int smallestR(struct node *r)
 }
 int smallest(struct node *r)
 {
-    if (r==NULL)return INT16_MAX;
+    if (r==NULL)return INT_MAX;
     while(r!=NULL)
     {
         if(r->lchild==NULL)
@@ -155,6 +155,58 @@ int In_node(struct node *r)
     }
     return In_node(r->lchild)+In_node(r->rchild);
 }
+int hight(struct node *r)
+{
+    if(r==NULL)return -1;
+    int lh=hight(r->lchild);
+    int rh=hight(r->rchild);
+    return(1+(lh>rh?lh:rh));
+}
+struct node * minVN(struct node *r)
+{
+    if(r==NULL)return r;
+    while(r->lchild!=NULL)
+    {
+        r=r->lchild;
+    }
+    return r;
+}
+struct node * delete(struct node *r,int key)
+{
+    if(r==NULL) return r;
+    if(key<r->data)
+    {
+        r->lchild=delete(r->lchild,key);
+    }
+    else if(key>r->data)
+    {
+        r->rchild=delete(r->rchild,key);
+    }
+    else//equal
+    {
+        if(r->lchild==NULL && r->rchild==NULL)
+        {
+            free(r);
+            return NULL;
+        }
+        if(r->lchild==NULL)
+        {
+            struct node * temp=r->rchild;
+            free(r);
+            return temp;
+        }
+        if(r->rchild==NULL)
+        {
+            struct node * temp=r->lchild;
+            free(r);
+            return temp;
+        }
+        struct node *temp=minVN(r->rchild);
+        r->data=temp->data;
+        r->rchild=delete(temp->rchild,temp->data);
+    }
+}
+
 int main()
 {
     insert(50);
@@ -164,7 +216,10 @@ int main()
     insert(90);
     insert(45);
     preorder(root);
-
+    delete(root,30);
+    printf("\n");
+    preorder(root);
+    /*
     struct node *temp=searchR(root,90);
     printf("\n%u",temp);
     temp=searchR(root,200);
@@ -176,6 +231,7 @@ int main()
     printf("\n%d",largest(root));
     printf("\n%d",total_node(root));
     printf("\n%d",In_node(root));
+    printf("\n%d",hight(root));*/
 
     return 0;
 }
